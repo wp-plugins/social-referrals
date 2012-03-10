@@ -3,7 +3,7 @@
 Plugin Name: Social Referrals
 Plugin URI: http://yourdomain.com/
 Description: Logs and displays social site referrals
-Version: 1.0
+Version: 1.1
 Author: Don Kukral
 Author URI: http://yourdomain.com
 License: GPL
@@ -25,7 +25,7 @@ function social_referrals_init() {
 
     if (get_option('social_referrals_facebook', 0)) {
         $ref_url = parse_url($_SERVER['HTTP_REFERER']);
-         if ($ref_url['host'] == 'www.facebook.com') {
+         if (($ref_url['host'] == 'www.facebook.com') || ($ref_url['host'] == 'm.facebook.com')) {
              social_referrals_log_entry($post->ID, $_SERVER['HTTP_REFERER'], 1, 0);
              return;
          }
@@ -51,7 +51,7 @@ function social_referrals_log_entry($post_id, $referral_url, $facebook, $twitter
         )
     );
     
-    $row = $wpdb->get_row("SELECT SUM(facebook) AS facebook, SUM(twitter) AS twitter FROM edliving_social_referrals WHERE ts > NOW() - INTERVAL 24 HOUR");
+    $row = $wpdb->get_row("SELECT SUM(facebook) AS facebook, SUM(twitter) AS twitter FROM edliving_social_referrals WHERE ts > NOW() - INTERVAL " . get_option('social_referrals_hours', 24) . " HOUR");
     update_option('social_referrals_facebook_count', $row->facebook);
     update_option('social_referrals_twitter_count', $row->twitter);
     
@@ -72,6 +72,8 @@ function social_referrals_settings_page() {
         else { delete_option('social_referrals_facebook'); }
         if ($_POST['social_referrals_twitter']) { update_option('social_referrals_twitter', 1); }
         else { delete_option('social_referrals_twitter'); }
+        if ($_POST['social_referrals_hours']) { update_option('social_referrals_hours', $_POST['social_referrals_hours']); }
+        else { update_option('social_referrals_hours', '24'); }
         echo '<div class="updated"><p>Social Referrals Settings Updated</p></div>';
     }
 ?>
@@ -91,6 +93,9 @@ function social_referrals_settings_page() {
 	        <td><input type="checkbox" name="social_referrals_twitter" <?php echo checked(get_option('social_referrals_twitter'), 1); ?>/> Track Twitter referrals.</td>
 	        </tr>
 	        <tr>
+	        <tr>
+	        <td>Display referrals for last <input type="text" name="social_referrals_hours" value="<?php echo get_option('social_referrals_hours', 24); ?>" size="3" style="text-align: center;"/> hours.</td>
+	        </tr>
             <tr>
             <td><input type="submit" value="Update"/></td>
             </tr>
