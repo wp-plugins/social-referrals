@@ -3,7 +3,7 @@
 Plugin Name: Social Referrals
 Plugin URI: http://yourdomain.com/
 Description: Logs and displays social site referrals
-Version: 1.1
+Version: 1.2
 Author: Don Kukral
 Author URI: http://yourdomain.com
 License: GPL
@@ -50,8 +50,7 @@ function social_referrals_log_entry($post_id, $referral_url, $facebook, $twitter
             '%d'
         )
     );
-    
-    $row = $wpdb->get_row("SELECT SUM(facebook) AS facebook, SUM(twitter) AS twitter FROM edliving_social_referrals WHERE ts > NOW() - INTERVAL " . get_option('social_referrals_hours', 24) . " HOUR");
+    $row = $wpdb->get_row("SELECT SUM(facebook) AS facebook, SUM(twitter) AS twitter FROM " . $wpdb->prefix . "social_referrals WHERE ts > NOW() - INTERVAL " . get_option('social_referrals_hours', 24) . " HOUR");
     update_option('social_referrals_facebook_count', $row->facebook);
     update_option('social_referrals_twitter_count', $row->twitter);
     
