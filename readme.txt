@@ -1,5 +1,5 @@
 === Social Referrals ===
-Contributors: jboydston, dkukral
+Contributors: jboydston, dkukral, Droyal
 Tags: social, facebook, twitter, statistics
 Requires at least: 3.0
 Tested up to: 3.3.1
