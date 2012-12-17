@@ -44,7 +44,7 @@ social_referrals_twitter_count
 
 == Screenshots ==
 
-None.
+1. Track Facebook and Twitter referral traffic to your WordPress site within the past 24 hours.
 
 == Changelog ==
 
