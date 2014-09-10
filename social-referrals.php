@@ -3,7 +3,7 @@
 Plugin Name: Social Referrals
 Plugin URI: http://yourdomain.com/
 Description: Logs and displays social site referrals
-Version: 1.4
+Version: 1.5
 Author: Don Kukral
 Author URI: http://yourdomain.com
 License: GPL
