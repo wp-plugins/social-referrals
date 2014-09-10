@@ -2,7 +2,7 @@
 Contributors: jboydston, dkukral
 Tags: social, facebook, twitter, statistics
 Requires at least: 3.0
-Tested up to: 3.3.1
+Tested up to: 4.0
 Stable Tag: 1.4
 
 Plugin for WordPress logs social site referrals and provides shortcodes for displaying them.
@@ -47,6 +47,9 @@ social_referrals_twitter_count
 None.
 
 == Changelog ==
+= 1.5 = 
+Verified compat with WP 4.0
+
 = 1.4 = 
 Verified compat with WP 3.9.1 
 
